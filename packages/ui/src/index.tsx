@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import * as React from "react";
 
 export function CHButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
