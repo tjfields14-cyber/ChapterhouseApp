@@ -17,3 +17,5 @@ export default function ErrorPage() {
 }
 
 
+
+export const dynamic = "error";

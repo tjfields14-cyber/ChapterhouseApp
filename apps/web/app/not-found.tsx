@@ -16,3 +16,5 @@ export default function NotFound() {
 }
 
 
+
+export const dynamic = "error";
