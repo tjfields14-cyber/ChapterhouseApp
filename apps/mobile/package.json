@@ -1,0 +1,24 @@
+{
+  "name": "@chapterhouse/mobile",
+  "private": true,
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "build": "echo \"Build mobile via EAS when ready\""
+  },
+  "dependencies": {
+    "expo": "~51.0.13",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,18 @@
+
+# dependencies
+node_modules
+.expo
+.expo-shared
+# next.js
+.next
+out
+# builds
+dist
+build
+_artifacts
+# env
+.env
+.env.*
+# OS
+.DS_Store
+Thumbs.db

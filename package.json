@@ -1,0 +1,26 @@
+{
+  "name": "chapterhouse",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "npm@10.8.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace @chapterhouse/web run dev",
+    "dev:mobile": "npm --workspace @chapterhouse/mobile run start",
+    "dev": "concurrently -k -n web,mobile \"npm:dev:web\" \"npm:dev:mobile\"",
+    "build:web": "npm --workspace @chapterhouse/web run build",
+    "build:mobile": "npm --workspace @chapterhouse/mobile run build",
+    "lint": "eslint .",
+    "format": "prettier -w .",
+    "conclude": "node tools/conclude.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^9.8.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
+  }
+}
