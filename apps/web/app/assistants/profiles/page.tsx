@@ -1,4 +1,6 @@
 ﻿"use client";
+export const dynamic = "force-dynamic";
+
 import React, { useEffect, useMemo, useState } from "react";
 import { createSupabase } from "../../../../../packages/avatar-kit/client";
 
@@ -10,12 +12,17 @@ type Row = {
 };
 
 export default function ProfilesPage() {
-  const supabase = useMemo(() => createSupabase(), []);
+  // Only create the client in the browser (avoids build-time env + SSR issues)
+  const supabase = useMemo(() => {
+    return typeof window !== "undefined" ? createSupabase() : null;
+  }, []);
+
   const [rows, setRows] = useState<Row[]>([]);
   const [status, setStatus] = useState("Loading…");
   const [username, setUsername] = useState("");
 
   async function load() {
+    if (!supabase) return; // SSR guard
     const { data, error } = await supabase
       .from("profiles")
       .select("id,username,avatar_url,created_at")
@@ -27,10 +34,11 @@ export default function ProfilesPage() {
     }
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [supabase]);
 
   async function addProfile(e: React.FormEvent) {
     e.preventDefault();
+    if (!supabase) return; // SSR guard
     const name = username.trim();
     if (!name) return;
     const { error } = await supabase.from("profiles").insert({ username: name });
@@ -40,9 +48,20 @@ export default function ProfilesPage() {
   }
 
   async function deleteProfile(id: string) {
+    if (!supabase) return; // SSR guard
     const { error } = await supabase.from("profiles").delete().eq("id", id);
     if (error) { alert(error.message); return; }
     await load();
+  }
+
+  // During server render, render a light shell
+  if (!supabase) {
+    return (
+      <main className="container">
+        <h1 className="text-2xl font-semibold">Profiles</h1>
+        <p className="opacity-80 mt-2">Loading…</p>
+      </main>
+    );
   }
 
   return (
