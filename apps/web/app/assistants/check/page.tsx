@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { createSupabase } from "../../../../../packages/avatar-kit/client";
 
@@ -6,16 +6,23 @@ export default function SupabaseCheckPage() {
   const [status, setStatus] = useState("Connecting…");
 
   useEffect(() => {
-    const supabase = createSupabase();
-    supabase
-      .from("profiles")
-      .select("*")
-      .limit(1)
-      .then(({ data, error }) => {
-        if (error) setStatus("Connected, but DB check failed: " + error.message);
-        else setStatus("Connected. profiles rows: " + (data?.length ?? 0));
-      })
-      .catch((e) => setStatus("Error: " + e.message));
+    const run = async () => {
+      try {
+        const supabase = createSupabase();
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .limit(1);
+        if (error) {
+          setStatus("Connected, but DB check failed: " + error.message);
+        } else {
+          setStatus("Connected. profiles rows: " + (data?.length ?? 0));
+        }
+      } catch (e: any) {
+        setStatus("Error: " + (e?.message ?? String(e)));
+      }
+    };
+    run();
   }, []);
 
   return (
