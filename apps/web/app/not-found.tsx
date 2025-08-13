@@ -1,12 +1,4 @@
-﻿export const dynamic = "error";
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-"use client";
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
-export default function NotFound() {
+﻿export default function NotFound() {
   return (
     <main className="container">
       <h1 className="text-2xl font-semibold">Not found</h1>
@@ -14,7 +6,3 @@ export default function NotFound() {
     </main>
   );
 }
-
-
-
-export const dynamic = "error";
