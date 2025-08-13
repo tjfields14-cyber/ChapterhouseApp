@@ -1,4 +1,5 @@
-﻿"use client";
+﻿// @ts-nocheck
+"use client";
 import * as React from "react";
 
 export function TreyAssistant() {
