@@ -1,8 +1,9 @@
 ﻿/** @type {import("next").NextConfig} */
 const nextConfig = {
+  output: "standalone",
   experimental: {
     typedRoutes: true,
-    externalDir: true, // allow imports from ../../../packages/*
+    externalDir: true,
   },
 };
 
