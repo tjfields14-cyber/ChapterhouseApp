@@ -1,4 +1,6 @@
-﻿import * as React from "react";
+﻿// @ts-nocheck
+"use client";
+import * as React from "react";
 
 export function BFFSuite() {
   return (
